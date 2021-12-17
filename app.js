@@ -41,10 +41,17 @@ var OBH = /** @class */ (function () {
     };
     return OBH;
 }());
+var ServiceType;
+(function (ServiceType) {
+    ServiceType[ServiceType["Renew"] = 0] = "Renew";
+    ServiceType[ServiceType["Login"] = 1] = "Login";
+    ServiceType[ServiceType["Cancel"] = 2] = "Cancel";
+})(ServiceType || (ServiceType = {}));
 var button = document.getElementById('btn');
 var service = document.getElementById('service');
 var task = document.getElementById('task');
 var selectedService;
+var currentOperation;
 service.addEventListener('change', function () {
     switch (service.value) {
         case '1':
@@ -55,6 +62,19 @@ service.addEventListener('change', function () {
             break;
         case '3':
             selectedService = new OBH();
+            break;
+    }
+});
+task.addEventListener('change', function () {
+    switch (task.value) {
+        case '1':
+            currentOperation = ServiceType.Renew;
+            break;
+        case '2':
+            currentOperation = ServiceType.Login;
+            break;
+        case '3':
+            currentOperation = ServiceType.Cancel;
             break;
     }
 });
