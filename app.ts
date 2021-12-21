@@ -40,12 +40,11 @@ class OBH implements Service {
 	}
 }
 
-enum ServiceType
-{
+enum ServiceType {
 	Renew,
 	Login,
-	Cancel
-}
+	Cancel,
+	}
 
 const button = document.getElementById('btn')!;
 const service = <HTMLSelectElement>document.getElementById('service');
@@ -55,23 +54,43 @@ let selectedService: Service;
 let currentOperation: ServiceType;
 
 service.addEventListener('change', () => {
-	switch(service.value){
-		case '1': selectedService = new NewFlix();
+	switch (service.value) {
+		case '1':
+			selectedService = new NewFlix();
 			break;
-		case '2': selectedService = new CamaronPrime();
+		case '2':
+			selectedService = new CamaronPrime();
 			break;
-		case '3': selectedService = new OBH();
+		case '3':
+			selectedService = new OBH();
 			break;
 	}
 });
 
 task.addEventListener('change', () => {
-	switch (task.value){
-		case '1': currentOperation= ServiceType.Renew;
+	switch (task.value) {
+		case '1':
+			currentOperation = ServiceType.Renew;
 			break;
-		case '2': currentOperation= ServiceType.Login;
+		case '2':
+			currentOperation = ServiceType.Login;
 			break;
-		case '3': currentOperation=ServiceType.Cancel;
+		case '3':
+			currentOperation = ServiceType.Cancel;
+			break;
+	}
+});
+
+button.addEventListener('click', () => {
+	switch (currentOperation) {
+		case ServiceType.Renew:
+			selectedService.Renew();
+			break;
+		case ServiceType.Login:
+			selectedService.Login();
+			break;
+		case ServiceType.Cancel:
+			selectedService.Cancel();
 			break;
 	}
 });

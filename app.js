@@ -78,3 +78,16 @@ task.addEventListener('change', function () {
             break;
     }
 });
+button.addEventListener('click', function () {
+    switch (currentOperation) {
+        case ServiceType.Renew:
+            selectedService.Renew();
+            break;
+        case ServiceType.Login:
+            selectedService.Login();
+            break;
+        case ServiceType.Cancel:
+            selectedService.Cancel();
+            break;
+    }
+});
